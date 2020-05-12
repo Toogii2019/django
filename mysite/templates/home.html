@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block subtitle %}App list{% endblock subtitle %}
+{% block content %}
+
+<div class="app">
+    {% for app in apps %}
+    <h2>
+        <a href="/{{app}}">{{app}}</a>
+    </h2>
+    {% endfor %}
+    </div>
+{% endblock %}
