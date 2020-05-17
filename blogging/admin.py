@@ -1,3 +1,7 @@
 from django.contrib import admin
+from polling.models import Poll
+from blogging.models import Category, Post
 
-# Register your models here.
+admin.site.register(Poll)
+admin.site.register(Post)
+admin.site.register(Category)
