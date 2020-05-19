@@ -5,6 +5,7 @@ from blogging.models import Category, Post
 
 class MembershipInline(admin.TabularInline):
     model = Category.posts.through
+    extra = 0
     pass
 
 class PostAdmin(admin.ModelAdmin):
