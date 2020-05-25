@@ -6,9 +6,10 @@ from django.template import loader
 
 def list_view(request):
     published = Post.objects.exclude(published_date__exact=None)
-    posts = published.order_by('-published_date')
-    context = {'posts': posts}
-    return render(request, 'blogging/list.html', context)
+    posts = published.order_by("-published_date")
+    context = {"posts": posts}
+    return render(request, "blogging/list.html", context)
+
 
 def detail_view(request, post_id):
     try:
@@ -16,9 +17,9 @@ def detail_view(request, post_id):
     except Poll.DoesNotExist:
         raise Http404
 
+    context = {"post": post}
+    return render(request, "blogging/detail.html", context)
 
-    context = {'post': post}
-    return render(request, 'blogging/detail.html', context)
 
 def stub_view(request, *args, **kwargs):
     body = "Stub View\n\n"
@@ -30,12 +31,15 @@ def stub_view(request, *args, **kwargs):
         body += "\n".join(["\t%s: %s" % i for i in kwargs.items()])
     return HttpResponse(body, content_type="text/plain")
 
+
 def detail_view(request, post_id):
     published = Post.objects.exclude(published_date__exact=None)
     try:
         post = published.get(pk=post_id)
     except Post.DoesNotExist:
         raise Http404
-    context = {'post': post}
-    return render(request, 'blogging/detail.html', context)
+    context = {"post": post}
+    return render(request, "blogging/detail.html", context)
+
+
 # Create your views here.
