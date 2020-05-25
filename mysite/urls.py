@@ -22,6 +22,7 @@ from blogging.models import Post
 from rest_framework import routers, serializers, viewsets
 from rest_framework.authtoken import views
 
+
 class PostSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Post
@@ -46,5 +47,5 @@ urlpatterns = [
     path("logout/", LogoutView.as_view(next_page="/"), name="logout"),
     url("api-v1/", include(router.urls)),
     #  url('', include('rest_framework.urls', namespace='rest_framework'))
-    path("api-auth-token/", views.obtain_auth_token, name="api-token-auth")
+    path("api-auth-token/", views.obtain_auth_token, name="api-token-auth"),
 ]
