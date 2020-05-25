@@ -8,24 +8,29 @@ class MembershipInline(admin.TabularInline):
     extra = 0
     pass
 
+
 class PostAdmin(admin.ModelAdmin):
-    inlines = [MembershipInline,]
+    inlines = [
+        MembershipInline,
+    ]
+
 
 class CategoryAdmin(admin.ModelAdmin):
-    inlines = [MembershipInline,]
-    exclude = ('posts',)
-
+    inlines = [
+        MembershipInline,
+    ]
+    exclude = ("posts",)
 
 
 admin.site.site_header = "Django Blog Admin"
 admin.site.site_title = "Django Blog Title"
 admin.site.index_title = "Django Blog Index"
 
-#admin.site.register(PostAdmin)
-#admin.site.register(CategoryAdmin)
+# admin.site.register(PostAdmin)
+# admin.site.register(CategoryAdmin)
 admin.site.register(Post, PostAdmin)
 admin.site.register(Category, CategoryAdmin)
 
 admin.site.register(Poll)
-#admin.site.register(Post)
-#admin.site.register(Category)
+# admin.site.register(Post)
+# admin.site.register(Category)
