@@ -20,7 +20,7 @@ from mysite.views import project_home
 from django.contrib.auth.views import LoginView, LogoutView
 from blogging.models import Post
 from rest_framework import routers, serializers, viewsets
-
+from rest_framework.authtoken import views
 
 class PostSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
@@ -44,6 +44,7 @@ urlpatterns = [
         "login/", LoginView.as_view(template_name="blogging/login.html"), name="login"
     ),
     path("logout/", LogoutView.as_view(next_page="/"), name="logout"),
-    url("api-auth/", include(router.urls)),
+    url("api-v1/", include(router.urls)),
     #  url('', include('rest_framework.urls', namespace='rest_framework'))
+    path("api-auth-token/", views.obtain_auth_token, name="api-token-auth")
 ]
