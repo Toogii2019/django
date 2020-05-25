@@ -15,16 +15,32 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.conf.urls import url
 from mysite.views import project_home
 from django.contrib.auth.views import LoginView, LogoutView
+from blogging.models import Post
+from rest_framework import routers, serializers, viewsets
 
+
+class PostSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Post
+        fields = ['url', 'title', 'text']
+
+class PostViewSet(viewsets.ModelViewSet):
+    queryset = Post.objects.all()
+    serializer_class = PostSerializer
+
+router = routers.DefaultRouter()
+router.register('posts', PostViewSet)
 
 urlpatterns = [
-    path("polling/", include("polling.urls")),
-    path("admin/", admin.site.urls),
-    path("", include("blogging.urls")),
-    path(
-        "login/", LoginView.as_view(template_name="blogging/login.html"), name="login"
-    ),
-    path("logout/", LogoutView.as_view(next_page="/"), name="logout"),
+    path('polling/', include('polling.urls')),
+    path('admin/', admin.site.urls),
+    path('', include('blogging.urls')),
+    path('login/', LoginView.as_view(template_name='blogging/login.html'), name="login"),
+    path('logout/', LogoutView.as_view(next_page='/'), name="logout"),
+    url('api-auth/', include(router.urls)),
+  #  url('', include('rest_framework.urls', namespace='rest_framework'))
 ]
+
