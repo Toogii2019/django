@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% block subtitle %}App list{% endblock subtitle %}
 {% block content %}
+{% load socialaccount %}
 
 <div class="app">
     {% for app in apps %}
