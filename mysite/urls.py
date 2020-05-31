@@ -40,7 +40,7 @@ router.register("posts", PostViewSet)
 urlpatterns = [
     path("polling/", include("polling.urls")),
     path("admin/", admin.site.urls),
-    path('accounts/', include('allauth.urls')),
+    path("accounts/", include("allauth.urls")),
     path("", include("blogging.urls")),
     path(
         "login/", LoginView.as_view(template_name="blogging/login.html"), name="login"
